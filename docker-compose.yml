@@ -1,0 +1,12 @@
+version: '2.1'
+
+services:
+    php:
+        image: webdevops/php-nginx:7.1
+        ports:
+            - "8080:80"
+        volumes:
+            - .:/var/www/
+        env_file:
+            - .env
+        working_dir: /var/www/
