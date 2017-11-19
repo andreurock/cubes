@@ -1,0 +1,8 @@
+<phpunit colors="true" strict="true" bootstrap="test/autoload.php">
+    <testsuites>
+        <testsuite name="The project's test suite">
+            <directory>./test</directory>
+            <exclude>./test/Cubes/Domain/Entity/EntityTest.php</exclude>
+        </testsuite>
+    </testsuites>
+</phpunit>
