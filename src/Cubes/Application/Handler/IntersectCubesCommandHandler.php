@@ -6,6 +6,7 @@ use Cubes\Application\Command\IntersectCubesCommand;
 use Cubes\Domain\Entity\Cube\Cube;
 use Cubes\Domain\Entity\CubeIntersection\CubeIntersection;
 use Cubes\Domain\ValueObject\Coordinates;
+use Cubes\Domain\Entity\CubeIntersection\NotIntersectionException;
 
 /**
  * Class IntersectCubesCommandHandler
@@ -24,7 +25,11 @@ final class IntersectCubesCommandHandler implements CommandHandler
         $cube1 = Cube::build($positionCube1, $command->edgeSizeCube1);
         $cube2 = Cube::build($positionCube2, $command->edgeSizeCube2);
 
-        $intersection = CubeIntersection::intersect($cube1, $cube2);
+        try {
+            $intersection = CubeIntersection::intersect($cube1, $cube2);
+        } catch (NotIntersectionException $exception) {
+            return 0;
+        }
 
         return $intersection->calculateVolume();
     }
